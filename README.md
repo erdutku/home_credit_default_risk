@@ -40,15 +40,43 @@ Converting: Last, but certainly not least, we'll deal with formatting. There are
 
 All variable analyze the correlation of target. We will choose higher than 0.05 or lower than -0.005. Correlations are very useful in many applications, especially when conducting regression analysis. However, it should not be mixed with causality and misinterpreted in any way. I should also always check the correlation between different variables in our dataset and gather some insights as part of my exploration and analysis.
 
+#### 6.1 Final Model Variable
+
+* AGE_CAL
+* CODE_GENDER_F
+* DAYS_LAST_PHONE_CHANGE
+
 ### 7. Results Summary
-Model ranking based on training data accuracy
-RandomForestClassifier model accuracy: 0.742
-GradientBoostingClassifier model accuracy: 0.736
-LogisticRegression model accuracy: 0.722
-Naive predictor accuracy: 0.471
-Model ranking based on training data F1-score
-RandomForestClassifier model f1-score: 0.735
-GradientBoostingClassifier model f1-score: 0.725
-LogisticRegression model f1-score: 0.716
-Naive predictor f1-score: 0.640
-Results suggest that the random forest model has the best training data accuracy and F1-score
+Model ranking based on test data accuracy and AUC
+* LogisticRegression model alternative 1 accuracy: 0.920
+* LogisticRegression model alternative 2 accuracy: 0.920
+
+* LogisticRegression model alternative 1 AUC: 0.626
+* LogisticRegression model alternative 2 AUC: 0.608
+
+Model ranking based on cross validation data F1-score
+* LogisticRegression model alternative 1 accuracy: 0.919
+* LogisticRegression model alternative 2 accuracy: 0.919
+
+* LogisticRegression model alternative 1 AUC: 0.621
+* LogisticRegression model alternative 2 AUC: 0.609
+
+Model altenative 2 is better than first model. Beucause of Cross Validation AUC value is higer than train dataset. In addition to between Model alternative 1 and Model alternative 2 Auc is similiar so I choose the Model Alternative 2.
+
+### 8. Conclusion
+
+My expectation would be credit type,credit amount or income type for final variable modelling. But these variable were eliminated correlation step. I am surprised for this happen. This proeject aimed to end to end data processing and data modelling in credit risk data. I enjoyed to analyze and create this project
+
+### 9. References
+* [Udacity Data Scientist Nanodegree Program](https://www.udacity.com/course/data-scientist-nanodegree--nd025)
+* [Kaggle's Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk)
+* [Source Data Dictionary](https://www.kaggle.com/c/home-credit-default-risk/data)
+* [Creating New Column](https://stackoverflow.com/questions/21702342/creating-a-new-column-based-on-if-elif-else-condition)
+* [Correlation Elimination](https://towardsdatascience.com/why-feature-correlation-matters-a-lot-847e8ba439c4)
+* [Train Test Cross Validation](https://tarangshah.com/blog/2017-12-03/train-validation-and-test-sets/)
+* [Credit Risk Modelling](https://smartdrill.com/pdf/Credit%20Risk%20Analysis.pdf)
+* [Lgistic Regression](https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc)
+* [Gradient Boosting](https://machinelearningmastery.com/gentle-introduction-gradient-boosting-algorithm-machine-learning/)
+* [LightGBM’s documentation](https://lightgbm.readthedocs.io/en/latest/)
+* [Pandas Data Frame Describe](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html)
+* [Pandas Missing Data](https://pandas.pydata.org/pandas-docs/stable/reference/frame.html#missing-data-handling)
