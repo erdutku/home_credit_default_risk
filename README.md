@@ -1,4 +1,4 @@
-# Home Credit Default Risk
+# Home Credit Default Risk Project
 ### 1. Description
 Many people struggle to get loans due to insufficient or non-existent credit histories. And, unfortunately, this population is often taken advantage of by untrustworthy lenders.
 
@@ -21,8 +21,36 @@ In this project, we ask you to complete the analysis of which customers of home 
 
 Project Metrics: Default customer can be predicted using less variable at credit risk perspective. So selected model specification must be explainable and applicable.
 
+### 4. Gather the Data
+The dataset is given to us as test and train data at Kaggle's Home Credit Default Risk
+
+#### 4.1 Import Libraries
+The following code is written in Python 3.x. Libraries provide pre-written functionality to perform necessary tasks.
+
+#### 4.2 Prepare the Data
+To begin this step, The data is imported firstly . Next we use the info() and head() function, to get a quick and dirty overview of variable datatypes (i.e. qualitative vs quantitative). Click here for the Source Data Dictionary.
+
+What is the distribution of categorical features?
+
+* Contract type as two possible values with 90% Cash loans (top=Cash loans, freq=278232/count=307511).
+* Gender variable as three possible values with 66% female (top=female, freq=202448/count=307511).
+* Own Car variable as two possible values with 66% "No" (top=N, freq=202924/count=307511).
+* Own Realty variable as two possible values with 69% "Yes" (top=Y, freq=213312/count=307511).
+* Suite Type variable as seven possible values with 81% unaccompanied (top=Unaccompanied, freq=248526/count=306219).
+* Income Type variable as eight possible values with 81% Working (top=Working, freq=248526/count=307511).
+* Education Type variable as five possible values with 71% unaccompanied (top=Secondary / secondary special, freq=218391/count=307511).
+* Family status variable as six possible values with 64% "Married" (top=Married, freq=196432/count=307511).
+* Housing type variable as six possible values with 89% "House / apartment " (top=House / apartment, freq=272868/count=307511).
+* Occupation type variable as eighteen possible values with 26% "Laborers" (top=Laborers, freq=55186/count=211120).
+* Weekday aproval process start day variable as seven possible values with 18% "TUESDAY" (top=TUESDAY, freq=53901/count=307511).
+* Organization type variable as fifty eight possible values with 22% "Business Entity Type 3" (top=Business Entity Type 3, freq=67992/count=307511).
+* Fondkapremont mode variable as four possible values with 76% "reg oper account" (top=reg oper account, freq=73830/count=97216).
+* House type variable as three possible values with 98% "block of flats" (top=block of flats, freq=150503/count=153214).
+* Walls material variable as seven possible values with 44% "Panel" (top=No, freq=66040/count=151170).
+* Emergency state variable as two possible values with 99% "No" (top=No, freq=159428/count=161756).
+
 ### 4. The 4 C's of Data Cleaning: Correcting, Completing, Creating, and Converting
-In this stage, data should have been cleaned
+* In this stage, data should have been cleaned
 
 Correcting abnormal values and outliers
 Completing missing information
@@ -40,28 +68,63 @@ Converting: Last, but certainly not least, we'll deal with formatting. There are
 
 All variable analyze the correlation of target. We will choose higher than 0.05 or lower than -0.005. Correlations are very useful in many applications, especially when conducting regression analysis. However, it should not be mixed with causality and misinterpreted in any way. I should also always check the correlation between different variables in our dataset and gather some insights as part of my exploration and analysis.
 
-#### 6.1 Final Model Variable
+#### 6.1 Elimination List
+EXT_SOURCE_1 variable is elimanted because of high correlated age_cal. I can choose the age_cal
+EXT_SOURCE_3 variable is elimanted because of high correlated age_cal. I can choose the age_cal
+Age_bin variable is elimanted because of high correlated age_cal. I can choose the age_cal
+Gender_M variable is elimanted because of high correlated Gender_F. I can choose the Gender_F
+REGION_RATING_CLIENT_W_CITY is elimanted because of moderate correlated ext_source_2. I can choose the ext_source_2
+NAME_INCOME_TYPE_Working is elimanted because of moderate correlated age_cal. I can choose the age_cal
+
+#### 6.2 Final Model Variable
 
 * AGE_CAL
 * CODE_GENDER_F
 * DAYS_LAST_PHONE_CHANGE
 
-### 7. Results Summary
-Model ranking based on test data accuracy and AUC
-* LogisticRegression model alternative 1 accuracy: 0.920
-* LogisticRegression model alternative 2 accuracy: 0.920
+#### 6.3 Train Test Cross Validation Split
+the data we use is usually split into training data and test data. The training set contains a known output and the model learns on this data in order to be generalized to other data later on. We have the test dataset (or subset) in order to test our model’s prediction on this subset. In order to avoid this, we can perform something called cross validation. It’s very similar to train/test split, but it’s applied to more subsets. I decided to split size in below side
 
-* LogisticRegression model alternative 1 AUC: 0.626
-* LogisticRegression model alternative 2 AUC: 0.608
+* Train dataset %60
+* Test dataset %20
+* Cross Validation dataset %20
+### 7. Modelling
+#### 7.1 Modelling selection
+In literature logistic regression have been used usually for credit risk modeling. So I selected logistic regression modelling approach. If accuracy and precision is lower than expectation, we will try more machine learning methodolgy.
 
-Model ranking based on cross validation data F1-score
-* LogisticRegression model alternative 1 accuracy: 0.919
-* LogisticRegression model alternative 2 accuracy: 0.919
+### 7.2 Modelling Metric
+In literature modelling result is done comparing auc roc score and precision. We have focused auc roc score and precision. It is one of the most important evaluation metrics for checking any classification model’s performance. AUC - ROC curve is a performance measurement for classification problem at various thresholds settings. ROC is a probability curve and AUC represents degree or measure of separability. It tells how much model is capable of distinguishing between classes. Higher the AUC, better the model is at predicting 0s as 0s and 1s as 1s.
 
-* LogisticRegression model alternative 1 AUC: 0.621
-* LogisticRegression model alternative 2 AUC: 0.609
+In a classification task, the precision for a class is the number of true positives (i.e. the number of items correctly labeled as belonging to the positive class) divided by the total number of elements labeled as belonging to the positive class (i.e. the sum of true positives and false positives, which are items incorrectly labeled as belonging to the class). Recall in this context is defined as the number of true positives divided by the total number of elements that actually belong to the positive class (i.e. the sum of true positives and false negatives, which are items which were not labeled as belonging to the positive class but should have been).
 
-Model altenative 2 is better than first model. Beucause of Cross Validation AUC value is higer than train dataset. In addition to between Model alternative 1 and Model alternative 2 Auc is similiar so I choose the Model Alternative 2.
+In information retrieval, a perfect precision score of 1.0 means that every result retrieved by a search was relevant (but says nothing about whether all relevant documents were retrieved) whereas a perfect recall score of 1.0 means that all relevant documents were retrieved by the search (but says nothing about how many irrelevant documents were also retrieved).
+
+It is also important for us that what percentage of estimated defaults are true defaults
+
+#### 7.4 Data Sampling
+Our model have not been predicted default customers. So we will need to apply new machine learning aproach and data set aproach
+We are doing sampling 50:50. Our dataset 24825 default customer and 24825 non-default customer. So we will train the alternative model for this dataset
+
+* Proportion of default in train: 0.4989929506545821
+* Proportion of default in test: 0.5003021148036254
+* Proportion of default in valditaion: 0.5027190332326285
+
+#### 7.5 Modelling Result
+QuadraticDiscriminantAnalysis is best score Precision and Area under the curve
+
+Precision: 0.6044389130885708
+Area under the curve: 0.6088810563323734
+GradientBoostingClassifier is best score Precision and Area under the curve
+
+Precision: 0.6101585940848693
+Area under the curve: 0.6126581898558849
+
+#### 7.6 Model Refinement
+QuadraticDiscriminantAnalysis is best model for results_precision and results_auc in kfold validation data. So the best model QuadraticDiscriminantAnalysis for this sampling dataset
+
+##### 7.6.1 K-Fold cross validation
+Now, we evaluate the performance of our classifiers with a 10-Fold cross validation.
+
 
 ### 8. Conclusion
 
@@ -80,3 +143,6 @@ My expectation would be credit type,credit amount or income type for final varia
 * [LightGBM’s documentation](https://lightgbm.readthedocs.io/en/latest/)
 * [Pandas Data Frame Describe](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html)
 * [Pandas Missing Data](https://pandas.pydata.org/pandas-docs/stable/reference/frame.html#missing-data-handling)
+* [tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset](https://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/)
+* [Precision_and_recall#F-measure](https://en.wikipedia.org/wiki/Precision_and_recall#F-measure) 
+* [understanding-auc-roc-curveReferences](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5)
